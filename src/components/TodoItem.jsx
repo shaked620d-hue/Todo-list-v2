@@ -11,7 +11,7 @@ const getStatusColor = (status) => {
     }
 };
 
-const TodoItem = ({ id, title, content, status, completed, onComplete }) => {
+const TodoItem = ({ id, title, content, status, completed, onComplete, onEdit, onDelete }) => {
     const itemStyle = {
         backgroundColor: getStatusColor(status),
         padding: '10px 15px',
@@ -25,6 +25,8 @@ const TodoItem = ({ id, title, content, status, completed, onComplete }) => {
             <h3>{title}</h3>
             <p>{content}</p>
             <p><strong>Status:</strong> {status}</p>
+
+        <div style={{ display: 'flex', gap: '5px', marginTop: '8px' }}>
 
             {!completed && (
                 <button
@@ -41,7 +43,25 @@ const TodoItem = ({ id, title, content, status, completed, onComplete }) => {
                 >
                     המשימה בוצעה
                 </button>
+
+                
             )}
+
+            <button
+                    onClick={() => onEdit({ id, title, content, completed })}
+                    style={{ padding: '5px 10px', backgroundColor: '#ff9800', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
+                >
+                    עריכה
+                </button>
+
+                <button
+                    onClick={() => onDelete(id)}
+                    style={{ padding: '5px 10px', backgroundColor: '#f44336', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
+                >
+                    מחיקה
+                </button>
+                    </div>
+
         </div>
     )
 }
