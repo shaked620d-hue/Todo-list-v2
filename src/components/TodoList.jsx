@@ -28,18 +28,31 @@ const TodoList = () => {
     };
 
 
-  return (
+  const  handleCompleteTask = (taskId) => {
+        setTasks(tasks.map((task) =>{
+            if(task.id === taskId) {
+                return {...task, completed: true};
+            }
+            return task;
+        }));
+
+    };
+
+    return (
    <div style={{ maxWidth: '400px', margin: '20px auto', fontFamily: 'Arial' }}>
             <h2>My Todo List</h2>
 
-            <TodoForm onAddTask={handleAddNewTask} />
+           <TodoForm onAddTask={handleAddNewTask} />
 
             {tasks.map((task) => (
                 <TodoItem
                     key={task.id}
+                    id={task.id}
                     title={task.title}
                     content={task.content}
+                    completed={task.completed} 
                     status={task.completed ? 'Completed' : 'Not Completed'}
+                    onComplete={handleCompleteTask}
                 />
             ))}
         </div>
