@@ -19,14 +19,11 @@ const TodoList = () => {
         }
 
         if (editingTask) {
-            // מצב עריכה: מעדכנים את המשימה הקיימת
             setTasks(tasks.map((task) => 
                 task.id === editingTask.id ? { ...task, content: content } : task
             ));
-            // מאפסים את מצב העריכה חזרה ל-null
             setEditingTask(null);
         } else {
-            // מצב הוספה רגיל
             const newId = Date.now();
             const newTask = {
                 id: newId,
@@ -40,7 +37,6 @@ const TodoList = () => {
 
     const handleDeleteTask = (taskId) => {
         setTasks(tasks.filter((task) => task.id !== taskId));
-        // אם המשימה שנמחקה הייתה במצב עריכה, נבטל את מצב העריכה
         if (editingTask && editingTask.id === taskId) {
             setEditingTask(null);
         }
